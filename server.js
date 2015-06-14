@@ -23,12 +23,12 @@ io.sockets.on('connection', function(socket) {
   socket.on('init', function(data) {
     if (isHost) {
       room = socket['id'];
-      match[room] = [data];
+      match[room] = {host: data};
       roomNumber += 1;
       isHost = false;
     } else {
       socket.join(room);
-      match[room].push(data);
+      match[room]['guest'] = data;
       isHost = true;
       // matching success
       console.log(match[room]);
